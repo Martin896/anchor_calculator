@@ -42,7 +42,7 @@ describe("calculator", () => {
     const account = await program.account.calculator.fetch(calculatorPair.publicKey)
     expect(account.result).to.eql(new anchor.BN(5))
 })
-it('Subraction',async () => {
+it('Subtraction',async () => {
   await program.methods.subtract(new anchor.BN(2), new anchor.BN(3))
   .accounts({
       calculator: calculatorPair.publicKey,
@@ -50,6 +50,16 @@ it('Subraction',async () => {
   .rpc()
   const account = await program.account.calculator.fetch(calculatorPair.publicKey)
   expect(account.result).to.eql(new anchor.BN(-1))
+})
+
+it('Division',async () => {
+  await program.methods.divide(new anchor.BN(4), new anchor.BN(2))
+  .accounts({
+      calculator: calculatorPair.publicKey,
+  })
+  .rpc()
+  const account = await program.account.calculator.fetch(calculatorPair.publicKey)
+  expect(account.result).to.eql(new anchor.BN(2))
 })
 
 });
