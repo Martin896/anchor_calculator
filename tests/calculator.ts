@@ -42,5 +42,14 @@ describe("calculator", () => {
     const account = await program.account.calculator.fetch(calculatorPair.publicKey)
     expect(account.result).to.eql(new anchor.BN(5))
 })
+it('Subraction',async () => {
+  await program.methods.subtract(new anchor.BN(2), new anchor.BN(3))
+  .accounts({
+      calculator: calculatorPair.publicKey,
+  })
+  .rpc()
+  const account = await program.account.calculator.fetch(calculatorPair.publicKey)
+  expect(account.result).to.eql(new anchor.BN(-1))
+})
 
 });

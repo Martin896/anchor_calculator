@@ -19,6 +19,12 @@ pub mod calculator {
         Ok(())
 
     }
+
+    pub fn subtract(ctx:Context<Subtraction>, num1: i64, num2: i64) -> ProgramResult{
+        let calculator = &mut ctx.accounts.calculator;
+        calculator.result =  num1 - num2;
+        Ok(())
+    }
 }
 
 #[derive(Accounts)]
@@ -31,13 +37,18 @@ pub struct Create<'info> {
     pub system_program: Program<'info, System>
  }
 
+
  #[derive(Accounts)]
  pub struct Add<'info> {
     #[account(mut)]
     pub calculator: Account<'info, Calculator>
 
  }
-
+#[derive(Accounts)]
+pub struct Subtraction <'info> {
+    #[account(mut)]
+    pub calculator: Account<'info, Calculator>
+}
 #[account]
 pub struct Calculator {
     greeting: String,
